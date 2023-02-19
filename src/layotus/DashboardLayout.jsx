@@ -4,13 +4,13 @@ import { toggleSidebar } from "../features/theme/themeSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function DashboardLayout(props) {
-  const { children, links } = props;
+  const { children, paths } = props;
   const { isSidebarCollapsed } = useSelector((state) => state.theme);
   return (
     <div className="flex relative">
       {!isSidebarCollapsed ? (
         <div className="w-72 fixed">
-          <Sidebar links={links} />
+          <Sidebar paths={paths} />
         </div>
       ) : (
         <div className="w-0">
