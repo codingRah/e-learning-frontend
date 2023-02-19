@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const createCourse = async (data) => {
   const { access } = data;
+  console.log(data);
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -14,3 +15,19 @@ export const createCourse = async (data) => {
     return response.data;
   }
 };
+
+
+export const fetchCourseCategory = async (access) => {
+  const config = {
+    headers : {
+      'Content-Type' : "application/json",
+      Authorization : `Bearer ${access}`
+    }
+  }
+
+  const response = await axios.get("/course/course-category/", config)
+
+  if(response) {
+    return response.data
+  }
+}

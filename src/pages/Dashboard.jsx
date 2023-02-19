@@ -47,7 +47,7 @@ export default function Dashboard() {
             <Sidebar />
           </aside>
         ) : (
-          <aside className="w-0">
+          <aside className=" hidden">
             <Sidebar />
           </aside>
         )}

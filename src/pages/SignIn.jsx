@@ -40,10 +40,10 @@ export default function SignIn() {
   }, [token]);
   useEffect(() => {
     const types = user_types.find((u_type) => u_type?.id === user?.user_type);
-    const { name } = types;
-    if (name === "instructor" || name === "استاد") {
+
+    if (types?.name === "instructor" || types?.name === "استاد") {
       navigate("/instructor/profile");
-    } else if (name === "student" || name === "شاگرد") {
+    } else if (types?.name === "student" || types?.name === "شاگرد") {
       navigate("/console");
     }
   }, [user]);
