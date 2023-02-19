@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { loginUser, fetchUserInfo } from "../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchUserType } from "../features/userType/typeSlice";
 import { useNavigate } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
 import { Link } from "react-router-dom";
@@ -14,6 +15,7 @@ export default function SignIn() {
     password: "",
   });
   const { token, status, user } = useSelector((state) => state.auth);
+  const { user_types } = useSelector((state) => state.userType);
 
   const { email, password } = formData;
   const onChange = (e) => {
@@ -28,16 +30,20 @@ export default function SignIn() {
     dispatch(loginUser(data));
   };
   useEffect(() => {
+    dispatch(fetchUserType());
+  }, []);
+  useEffect(() => {
     if (token) {
       const access = token.access;
       dispatch(fetchUserInfo(access));
     }
   }, [token]);
   useEffect(() => {
-    if (user && user?.u_type === "استاد") {
+    const types = user_types.find((u_type) => u_type?.id === user?.user_type);
+    const { name } = types;
+    if (name === "instructor" || name === "استاد") {
       navigate("/instructor/profile");
-    }
-    if (user && user?.u_type === "شاگرد") {
+    } else if (name === "student" || name === "شاگرد") {
       navigate("/console");
     }
   }, [user]);

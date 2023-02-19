@@ -14,7 +14,7 @@ export const fetchUser = async (access) => {
       Authorization: `Bearer ${access}`,
     },
   };
-  const response = await axios.get(`/user/user-info/`, config);
+  const response = await axios.get(`/auth/users/me/`, config);
   if (response) {
     return response.data;
   }
