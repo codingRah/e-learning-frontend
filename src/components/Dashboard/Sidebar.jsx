@@ -17,7 +17,7 @@ export default function Sidebar(props) {
   return (
     <div className="h-screen bg-gray-200">
       <div>
-        <div className="flex items-center justify-center pt-20 text-3xl">
+        <div className="flex px-10 items-center justify-center pt-20 text-3xl">
           Logo
         </div>
       </div>

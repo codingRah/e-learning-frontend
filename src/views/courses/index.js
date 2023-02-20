@@ -3,9 +3,8 @@ import reducer from "./store";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsersCourse } from "./store/dataSlice";
 import { Link } from "react-router-dom";
-
 import { injectReducer } from "../../app/store";
-
+import Breadcrumbs from "../../components/Breadcrumbs";
 injectReducer("courses", reducer);
 
 export default function Course() {
@@ -21,6 +20,7 @@ export default function Course() {
 
   return (
     <div className="mt-10">
+      {/* <Breadcrumbs /> */}
       <div className="flex">
         {courses.map((course, index) => (
           <div className="mx-5" key={index}>

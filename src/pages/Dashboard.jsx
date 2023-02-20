@@ -47,13 +47,15 @@ export default function Dashboard() {
             <Sidebar />
           </aside>
         ) : (
-          <aside className=" hidden">
+          <aside className="w-0 text-[2px] hidden">
             <Sidebar />
           </aside>
         )}
 
         <div
-          className={`min-h-screen w-full ${sidebar ? "md:mr-72" : "flex-2"}`}
+          className={`min-h-screen w-full ${
+            sidebar ? "mr-1 md:mr-72" : "flex-2"
+          }`}
         >
           <div className="fixed md:static w-full">
             <MenuBar />

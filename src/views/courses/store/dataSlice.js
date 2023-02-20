@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import { createCourse , fetchCourseCategory, getUsersAllCourse } from "../../../services/courseService";
+import { createCourse , fetchCourseCategory, getUsersAllCourse, updateCourse } from "../../../services/courseService";
 
 export const newCourse = createAsyncThunk(
   "courses/added",
@@ -19,6 +19,17 @@ export const fetchUsersCourse = createAsyncThunk(
   async(access, thunkAPI) => {
     try{  
       return await getUsersAllCourse(access)
+    }catch(error){
+      return thunkAPI.rejectWithValue(error.message)
+    }
+  }
+)
+
+export const editCourse = createAsyncThunk(
+  "course/updated", 
+  async (data, thunkAPI) => {
+    try{
+      return await updateCourse(data)
     }catch(error){
       return thunkAPI.rejectWithValue(error.message)
     }
@@ -87,6 +98,19 @@ const courseSlice = createSlice({
         state.courses = action.payload
       })
       .addCase(fetchUsersCourse.rejected, (state, action) => {
+        state.status = "failed"
+        state.error = action.payload
+      })
+
+      // update course
+      .addCase(editCourse.pending, (state) => {
+        state.status = "loading"
+      })
+      .addCase(editCourse.fulfilled, (state, action) => {
+        state.status = "succeeded"
+        state.course = action.payload
+      })
+      .addCase(editCourse.rejected, (state, action) => {
         state.status = "failed"
         state.error = action.payload
       })
