@@ -43,7 +43,7 @@ export default function Dashboard() {
 
         {/*  */}
         {sidebar ? (
-          <aside className="w-72 fixed">
+          <aside className="w-72 relative">
             <Sidebar />
           </aside>
         ) : (

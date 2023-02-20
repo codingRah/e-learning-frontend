@@ -21,7 +21,7 @@ export default function Sidebar(props) {
           Logo
         </div>
       </div>
-      <div className="pt-20 mx-4  ">
+      <div className="pt-20 mx-4">
         {paths?.map((path, index) => (
           <Menu key={index} as="div" className="relative">
             <Menu.Button
@@ -35,12 +35,16 @@ export default function Sidebar(props) {
                   )
                 )
               }
-              className="flex items-center justify-center items-center justify-between w-full text-sm font-medium text-gray-800  border-0 "
+              className="flex  font-medium w-full text-gray-800  border-0 "
             >
-              <button className="flex  justify-between items-center rounded-md px-2 hover:bg-gray-100 transition-all ease-in-out duration-400 py-2  font-farsi font-semibold">
-                {path.icon} {path.name}
-                <span className="text-xl w-full ">{toggleArrow}</span>
-              </button>
+              <div className="flex  justify-between w-full items-center rounded-md px-2 hover:bg-gray-100 transition-all ease-in-out duration-400 py-2  font-farsi font-semibold">
+                <div className="flex items-center w-64 justify-between">
+                  {path.icon} {path.name}
+                </div>
+                <span className="text-xl w-full flex justify-end ">
+                  {toggleArrow}
+                </span>
+              </div>
             </Menu.Button>
 
             {path?.subPaths && (
@@ -49,10 +53,19 @@ export default function Sidebar(props) {
                   {path?.subPaths?.map((sub) => (
                     <Menu.Item key={sub.url}>
                       <Link
+                        onClick={() =>
+                          toggleHandler(
+                            arrowIcon === false ? (
+                              <IoIosArrowDown />
+                            ) : (
+                              <MdArrowBackIosNew />
+                            )
+                          )
+                        }
                         to={sub.url}
-                        className="flex justify-between mx-auto px-2 text-sm "
+                        className="flex items-center font-farsi hover:bg-gray-100 py-1 mx-auto px-2 text-sm "
                       >
-                        {sub.name} {sub.icon}
+                        {sub.icon} {sub.name}
                       </Link>
                     </Menu.Item>
                   ))}
